@@ -1,6 +1,8 @@
 npm init -y
 
-npm install express pg dotenv
+npm install express
+
+npm install dotenv
 
 npm install nodemon -D
 
