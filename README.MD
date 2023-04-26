@@ -9,3 +9,5 @@ npm install nodemon -D
 npm install pg
 
 npm install cors
+
+npm install body-parser 

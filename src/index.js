@@ -65,7 +65,7 @@ app.patch('/lojas/:user_id/:loja_id', async (req, res) =>{
   }
 });
 
-app.delete('/todo/:user_id/:id_loja', async (req, res) =>{
+app.delete('/lojas/:user_id/:id_loja', async (req, res) =>{
   const { user_id, id_loja } = req.params;
   try{
     // const permissaoUsuario = await pool.query('SELECT * FROM usuarios WHERE id = ($1) AND adm = ($2)', [user_id, true]);
@@ -79,4 +79,5 @@ app.delete('/todo/:user_id/:id_loja', async (req, res) =>{
     return res.status(400).send(err);
   }
 });
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
