@@ -8,3 +8,4 @@ npm install nodemon -D
 
 npm install pg
 
+npm install cors

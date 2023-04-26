@@ -1,11 +1,11 @@
 const express = require('express');
 const PORT = 3333;
-
+const cors = require('cors');
 const pool = require('./database/_database');
-
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) =>{console.log('raiz')});
 app.get('/lojas', async (req,res) => {
@@ -63,5 +63,20 @@ app.patch('/lojas/:user_id/:loja_id', async (req, res) =>{
   }catch(err){
     return res.status(400).send(err);
   }
-})
+});
+
+app.delete('/todo/:user_id/:id_loja', async (req, res) =>{
+  const { user_id, id_loja } = req.params;
+  try{
+    // const permissaoUsuario = await pool.query('SELECT * FROM usuarios WHERE id = ($1) AND adm = ($2)', [user_id, true]);
+    // if(!permissaoUsuario.rows[0]) return res.status(400).send('Usuário sem permissão.');
+    const deleteLoja = await pool.query('DELETE FROM lojas WHERE id = ($1) RETURNING *', [id_loja]);
+    return res.status(200).send({
+      message: "Loja deletada com sucesso",
+      deleteLoja
+    });
+  }catch(err){
+    return res.status(400).send(err);
+  }
+});
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
